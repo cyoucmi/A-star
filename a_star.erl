@@ -6,8 +6,6 @@
 -module(a_star).
 -export([path/2]).
 
--include("common.hrl").
-
 path(Start={_,_}, Goal={_,_})->
     ClosedSet = gb_trees:empty(), %% The set of nodes already evaluated.
     OpenSet0 = gb_trees:empty(),
@@ -38,7 +36,6 @@ path_1(ClosedSet, OpenSet, CameFrom, G_Score, F_Score, OpenSet_F_Score, Start, G
                 Current =:= Goal ->
                    reconstruct_path(CameFrom, Goal);
                true->
-                   %?DBG({gb_trees:size(OpenSet_F_Score), gb_trees:size(OpenSet)}),
 				   OpenSet1 = gb_trees:delete(Current, OpenSet),
                    OpenSet_F_Score1 = gb_trees:delete({CurrF_Score, Current}, OpenSet_F_Score),
 				   ClosedSet1 = gb_trees:insert(Current, true, ClosedSet),
