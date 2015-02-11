@@ -7,11 +7,11 @@ function A*(start,goal)
     closedset := the empty set    // The set of nodes already evaluated.
     openset := {start}    // The set of tentative nodes to be evaluated, initially containing the start node
     came_from := the empty map    // The map of navigated nodes.
- 
+	
     g_score[start] := 0    // Cost from start along best known path.
     // Estimated total cost from start to goal through y.
     f_score[start] := g_score[start] + heuristic_cost_estimate(start, goal)
- 
+	
     while openset is not empty
         current := the node in openset having the lowest f_score[] value
         if current = goal
@@ -32,7 +32,7 @@ function A*(start,goal)
                     add neighbor to openset
  
     return failure
- 
+	
 function reconstruct_path(came_from,current)
     total_path := [current]
     while current in came_from:
